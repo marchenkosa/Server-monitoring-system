@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Дашборд - Система Мониторинга{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Дашборд</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshData()">
+                <i class="fas fa-sync-alt"></i> Обновить
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Статус серверов -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h4>Статус серверов</h4>
+        <div id="servers-list" class="row">
+            <!-- Серверы будут загружены через JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- Активные оповещения -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Активные оповещения</h5>
+            </div>
+            <div class="card-body">
+                <div id="active-alerts">
+                    <!-- Оповещения будут загружены через JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Оповещения - Система Мониторинга{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Оповещения</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshAlerts()">
+                <i class="fas fa-sync-alt"></i> Обновить
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Фильтры -->
+<div class="row mb-3">
+    <div class="col-md-3">
+        <select class="form-select" id="statusFilter" onchange="loadAlerts()">
+            <option value="active">Активные</option>
+            <option value="resolved">Решенные</option>
+            <option value="all">Все</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" id="severityFilter" onchange="loadAlerts()">
+            <option value="all">Все уровни</option>
+            <option value="critical">Критические</option>
+            <option value="warning">Предупреждения</option>
+            <option value="info">Информация</option>
+        </select>
+    </div>
+</div>
+
+<!-- Таблица оповещений -->
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>Сервер</th>
+                <th>Тип</th>
+                <th>Сообщение</th>
+                <th>Уровень</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody id="alertsTable">
+            <!-- Оповещения загружаются через JS -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Статистика -->
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5 class="card-title" id="criticalCount">0</h5>
+                <p class="card-text">Критических</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title" id="warningCount">0</h5>
+                <p class="card-text">Предупреждений</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title" id="activeCount">0</h5>
+                <p class="card-text">Активных</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+{% endblock %}
